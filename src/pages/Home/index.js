@@ -9,88 +9,7 @@ import Forecast from '../../components/Forecast'
 
 import api, { key } from '../../services/api'
 
-const myList = [
-    {
-      "date": "19/03",
-      "weekday": "Sex",
-      "max": 24,
-      "min": 18,
-      "description": "Tempestades",
-      "condition": "clear-day"
-    },
-    {
-      "date": "20/03",
-      "weekday": "Sáb",
-      "max": 26,
-      "min": 18,
-      "description": "Tempestades isoladas",
-      "condition": "storm"
-    },
-    {
-      "date": "21/03",
-      "weekday": "Dom",
-      "max": 28,
-      "min": 17,
-      "description": "Ensolarado com muitas nuvens",
-      "condition": "cloudly_day"
-    },
-    {
-      "date": "22/03",
-      "weekday": "Seg",
-      "max": 28,
-      "min": 18,
-      "description": "Ensolarado com muitas nuvens",
-      "condition": "cloudly_day"
-    },
-    {
-      "date": "23/03",
-      "weekday": "Ter",
-      "max": 28,
-      "min": 17,
-      "description": "Tempestades isoladas",
-      "condition": "storm"
-    },
-    {
-      "date": "24/03",
-      "weekday": "Qua",
-      "max": 28,
-      "min": 17,
-      "description": "Tempestades",
-      "condition": "storm"
-    },
-    {
-      "date": "25/03",
-      "weekday": "Qui",
-      "max": 26,
-      "min": 18,
-      "description": "Tempestades",
-      "condition": "storm"
-    },
-    {
-      "date": "26/03",
-      "weekday": "Sex",
-      "max": 28,
-      "min": 19,
-      "description": "Tempestades",
-      "condition": "storm"
-    },
-    {
-      "date": "27/03",
-      "weekday": "Sáb",
-      "max": 26,
-      "min": 18,
-      "description": "Tempestades",
-      "condition": "storm"
-    },
-    {
-      "date": "28/03",
-      "weekday": "Dom",
-      "max": 26,
-      "min": 18,
-      "description": "Tempestades",
-      "condition": "storm"
-    }
-  ]
+
 
 const Home = () => {
   const [errorMsg, setErroMsg] = useState(null)
@@ -113,7 +32,7 @@ const Home = () => {
 
             ///weather?key=f8de8d2b&lat=-23.682&lon=-46.875
             const response = await api.get(`/weather?key=${key}&lat=${location.coords.latitude}&lon=${location.coords.longitude}`);
-            console.log(response.data);
+            //console.log(response.data);
 
             setWeather(response.data);
 
@@ -148,7 +67,7 @@ const Home = () => {
     if (loading) {
       return(
         <View style={styles.container}>
-          <Text style={{fontSize: 20, fonStyle: 'italic'}}>Obtendo dados... {"\n"} Por Favor aguarde </Text>
+          <Text style={styles.loading}>Obtendo dados... {"\n"}{"\n"}Por Favor aguarde </Text>
         </View>
       )
     }
@@ -163,7 +82,7 @@ const Home = () => {
                 style={styles.list}
                 horizontal={true}
                 contentContainerStyle={{paddingBottom: '5%'}}
-                data={myList}
+                data={weather.results.forecast}
                 keyExtractor={item => item.date}
                 renderItem={ ({item}) =>  <Forecast data={item} />}
             />
@@ -186,5 +105,9 @@ const styles = StyleSheet.create({
     list:{
         marginTop: 10,
         marginLeft: 10,
+    },
+    loading: {
+      fontStyle: 'italic',
+      fontSize: 20
     },
 })

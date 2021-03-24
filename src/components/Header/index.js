@@ -20,6 +20,7 @@ const Header = ({ background, weather, icon}) => {
             />
 
             <Text style={styles.temp}>{weather.results.temp}°</Text>
+            <Text style={styles.description}>{weather.results.description}°</Text>
         </LinearGradient>
     )
 }
@@ -50,6 +51,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
 
     },
+    description:{
+        color: '#fff',
+        fontSize: 25,
+
+    }
     
 
 })
